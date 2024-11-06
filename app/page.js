@@ -15,7 +15,10 @@ export default async function Home() {
     <div className="flex justify-center items-center mt-10 gap-4 flex-wrap">
      {
       moviesResult.map((movie)=>{
-        return (<Card key={movie.id} thumbnail={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} name={`${movie.title}`} genre={'comedy'} rating={`${movie.vote_average}`} duration={'40'} date={`${movie.release_date}`} link={`https://vidsrc.xyz/embed/movie?tmdb=${movie.id}`}/>
+        return (<Card key={movie.id}
+           thumbnail={`https://image.tmdb.org/t/p/w1280/${movie.poster_path}`}
+          // thumbnail={'https://image.tmdb.org/t/p/w1280/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg'}
+           name={`${movie.title}`} genre={'comedy'} rating={`${movie.vote_average}`} duration={'40'} date={`${movie.release_date}`} link={`https://vidsrc.xyz/embed/movie?tmdb=${movie.id}`}/>
 )
       })
      }

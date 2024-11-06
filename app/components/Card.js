@@ -17,7 +17,7 @@ function Card({name,genre,language,duration,thumbnail,date,rating,id,link}) {
 
             <div className="image  w-full lg:h-5/6 h-4/6">
                 <img src={thumbnail} alt="" 
-                className='object-cover h-full w-full' 
+                className='object-contain h-full w-full' 
               
                 />
             </div>
