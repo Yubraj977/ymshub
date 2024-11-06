@@ -1,4 +1,8 @@
+
 /** @type {import('tailwindcss').Config} */
+
+
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -11,6 +15,13 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily:{
+        danfo:["var(--danfo)"],
+        allerta:["var(--allerta)"],
+        allerta_stencil:["var(--allerta_stencil)"],
+        inter:["var(--inter)"],
+      }
+    
     },
   },
   plugins: [],
