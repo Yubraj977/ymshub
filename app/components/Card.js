@@ -26,7 +26,7 @@ function Card({name,genre,language,duration,thumbnail,date,rating,id,link}) {
                 <h1 className='dark:text-white font-bold w-full '>{name}</h1>
 
                 <div className='w-full justify-between flex py-2 dark:text-white'>
-                    <h1 className=' dark:text-white font-allerta'>{duration} min</h1>
+                    <h1 className=' dark:text-white font-allerta'> <span className='text-[#fa6900]'> ★  </span>{rating}  </h1>
                     <h2 className='font-allereta text-sm bg-slate-900 px-4  text-white rounded-lg'>{date}</h2>
                 </div>
                 <div className='text-white flex justify-start font-inter text-sm  absolute bottom-1 left-2'>{language}</div>

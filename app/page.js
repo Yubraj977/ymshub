@@ -11,6 +11,7 @@ export default async function Home() {
   });
   const movies = await res.json();
   const moviesResult=await movies.results;
+  console.log(moviesResult.length);
   return (
     <div className="flex justify-center items-center mt-10 gap-4 flex-wrap">
      {
