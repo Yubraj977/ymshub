@@ -1,7 +1,6 @@
 // "use client"
 import Image from "next/image";
 import Card from "./components/Card";
-import { Pagination } from "flowbite-react";
 
 export default async function Home() {
   const res = await fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', {

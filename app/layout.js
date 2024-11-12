@@ -57,10 +57,10 @@ export default function RootLayout({ children }) {
         } bg-[#374151] text-white`}
       >
         <Nav />
-        <div className="font-bold text-4xl text-center mt-10">
-          <h1>Find Movies TV shows Download and enjoy</h1>
+        <div className="font-bold text-md lg:text-4xl text-center mt-10">
+          <h1 >Find Movies TV shows Download and enjoy</h1>
 
-          <form className="max-w-3xl mx-auto mt-4  ">
+          <form className="max-w-3xl mx-3 lg:mx-auto mt-4  ">
             <label
               htmlFor="default-search"
               className="mb-2 text-sm font-medium text-[#fa6900] sr-only"
@@ -100,11 +100,11 @@ export default function RootLayout({ children }) {
               </button>
             </div>
           </form>
-          <h1 className="text-lg font-bold font-allerta_stencil mt-4">
+          <h1 className=" text-sm lg:text-lg font-bold font-allerta_stencil mt-4">
             This is the website where you can download any kind of movies as per
             your preference happy entertainment
           </h1>
-          <h1 className="text-lg font-allerta_stencil">
+          <h1 className="text-lg font-allerta_stencil hidden lg:block">
             This is the website where you can download any kind of movies as per
             your preference happy entertainment
           </h1>

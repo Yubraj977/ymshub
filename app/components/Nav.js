@@ -13,7 +13,7 @@ const Nav = () => {
       setIsOpen(!isOpen);
     };
   return (
-    <div className='flex justify-between px-10 pt-4'>
+    <div className=' flex justify-between px-10 pt-4'>
         {/* THe part for the logos */}
 
         <Link href='/'>
@@ -29,7 +29,7 @@ const Nav = () => {
       </div>
       </Link>
 
-      <div className='flex gap-2 text-sm font-inter mt-5 font-bold text-center'> 
+      <div className='hidden lg:flex gap-2 text-sm font-inter mt-5 font-bold text-center '> 
         <Link href="/" className=''>Home</Link>
         <Link href={''}>Comedy</Link>
         <Link href={''} className=''>Action</Link>
@@ -78,10 +78,10 @@ Language
 
     
 
-        <Link href="about">About</Link>
+        <Link href="about" className=''>About</Link>
       </div>
       <div>
-        <p>
+        <p className='hidden lg:flex'>
             Contribute
         </p>
       </div>
