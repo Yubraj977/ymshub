@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
 import {
   Kablammo,
@@ -49,7 +50,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/jerry.png" />
+        <link
+          rel="icon"
+          href="/jerry.png"
+          type="image/<generated>"
+          sizes="<generated>"
+
+        />
       </head>
       <body
         className={`${
@@ -58,7 +65,7 @@ export default function RootLayout({ children }) {
       >
         <Nav />
         <div className="font-bold text-md lg:text-4xl text-center mt-10">
-          <h1 >Find Movies TV shows Download and enjoy</h1>
+          <h1>Find Movies TV shows Download and enjoy</h1>
 
           <form className="max-w-3xl mx-3 lg:mx-auto mt-4  ">
             <label
@@ -110,9 +117,9 @@ export default function RootLayout({ children }) {
           </h1>
         </div>
         {children}
-        <div className="flex mt-8">
-          {/* <Mypagination /> */}
-        </div>
+        <Analytics />
+
+        <div className="flex mt-8">{/* <Mypagination /> */}</div>
       </body>
     </html>
   );

@@ -154,9 +154,9 @@ Language
 
 
       <div className='hidden lg:flex'>
-        <p className=''>
+        <a className='' href='https://github.com/Yubraj977/ymshub' target='_blank'>
             Contribute
-        </p>
+        </a>
       </div>
 
 
