@@ -3,7 +3,9 @@ import Card from '../components/Card';
 
 export default async function About() {
   // Fetch the list of movies
-  const res = await fetch('https://vidsrc.xyz/movies/latest/page-1.json');
+  const res = await fetch('https://vidsrc.xyz/movies/latest/page-1.json',{
+    cache:'no-store'
+  });
   const movies = await res.json();
   const moviesResult = movies.result;
 
@@ -15,6 +17,7 @@ export default async function About() {
         headers: {
           Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNjg2NDM3ZmNlOGVkNTNlMGZmOTAxNjk4ZmZjYmUyMyIsIm5iZiI6MTcyOTg3NTc1Mi4xNDI2OTYsInN1YiI6IjY2ZmMzMDQyZTc4MTFlZjZjYmE2OGJhMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VeJrevImAytcFBxav44M1s4mS1zdr73hkwjCCI5AOMg`,
         },
+        cache:'no-store'
       });
       const details = await tmdbRes.json();
      

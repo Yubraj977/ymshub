@@ -1,14 +1,13 @@
 "use client"
 import Image from 'next/image';
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
-
+// import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 function Card({name,genre,language,duration,thumbnail,date,rating,id,link}) {
-  
-  
+    const router=useRouter()
     function handleClick(){
-        navigate(`/movie/${id}`);
+        router.push(`/movie/${id}`);
     }
 
     return (
