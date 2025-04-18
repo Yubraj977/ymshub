@@ -1,12 +1,13 @@
 // "use client"
 import Image from "next/image";
 import Card from "./components/Card";
-
+export const dynamic = 'force-dynamic';
 export default async function Home() {
   const res = await fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', {
     headers: {
       Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNjg2NDM3ZmNlOGVkNTNlMGZmOTAxNjk4ZmZjYmUyMyIsIm5iZiI6MTcyNzg4NjE1My44MDcyMDcsInN1YiI6IjY2ZmMzMDQyZTc4MTFlZjZjYmE2OGJhMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BSHTZ451kreqaeW8mwu4k216v27RuRmTJmxx2DkdmsQ`,
     },
+    cache:'no-store'
   });
   const movies = await res.json();
   const moviesResult=await movies.results;
