@@ -105,6 +105,7 @@ export default async function SearchPage({ searchParams }) {
                 date={releaseDate ? releaseDate.split('-')[0] : 'N/A'}
                 language={item.original_language ? item.original_language.toUpperCase() : 'N/A'}
                 link={vidsrcLink}
+                mediaType={item.media_type} // Add this line
               />
             );
           })}
