@@ -2,8 +2,10 @@
 import Image from 'next/image';
 import React from 'react'
 import { useRouter } from 'next/navigation';
+import ImageWithFallback from './ImageWithFallback';
+import { getAvailabilityIndicator, getAvailabilityIcon } from '../utils/availabilityChecker';
 
-function Card({name, genre, language, duration, thumbnail, date, rating, id, link, mediaType}) {
+function Card({name, genre, language, duration, thumbnail, date, rating, id, link, mediaType, item}) {
     const router = useRouter();
     
     function handleClick(e) {
@@ -16,6 +18,9 @@ function Card({name, genre, language, duration, thumbnail, date, rating, id, lin
         }
     }
 
+    // Get availability indicator
+    const availability = item ? getAvailabilityIndicator(item) : { status: 'unknown', label: 'HD', color: 'bg-[#fa6900]' };
+
     return (
         <div 
             className="main lg:w-64 lg:h-[30rem] w-40 h-[19rem] hover:scale-105 bg-slate-400 dark:bg-opacity-10 bg-opacity-20 flex flex-col justify-between relative transition-transform duration-200 rounded-lg overflow-hidden cursor-pointer"
@@ -23,17 +28,21 @@ function Card({name, genre, language, duration, thumbnail, date, rating, id, lin
         >
             <div className="flex flex-col h-full">
                 <div className="image w-full lg:h-5/6 h-4/6 relative">
-                    <img 
+                    <ImageWithFallback 
                         src={thumbnail} 
                         alt={name || 'Movie poster'} 
                         className='object-cover h-full w-full'
-                        onError={(e) => {
-                            e.target.src = '/placeholder-movie.jpg'; // You should add a placeholder image
-                        }}
+                        fallbackSrc='/placeholder-movie.jpg'
                     />
                     {/* Genre badge */}
                     <div className="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
                         {genre}
+                    </div>
+                    
+                    {/* Availability indicator */}
+                    <div className={`absolute top-2 left-2 ${availability.color} text-white text-xs px-2 py-1 rounded flex items-center gap-1`}>
+                        <span>{getAvailabilityIcon(availability.status)}</span>
+                        <span>{availability.label}</span>
                     </div>
                     
                     {/* Play button overlay */}
@@ -47,22 +56,26 @@ function Card({name, genre, language, duration, thumbnail, date, rating, id, lin
                 </div>
 
                 <div className='info p-2 flex flex-col justify-center items-center flex-grow'>
-                    <h1 className='dark:text-white font-bold w-full text-center text-sm lg:text-base line-clamp-2'>
+                    <h1 className='dark:text-white font-bold w-full text-center text-sm lg:text-base line-clamp-2 mb-2'>
                         {name || 'Unknown Title'}
                     </h1>
 
-                    <div className='w-full justify-between flex py-2 dark:text-white text-xs lg:text-sm'>
-                        <h1 className='dark:text-white font-allerta flex items-center'> 
-                            <span className='text-[#fa6900]'>★</span>
-                            <span className="ml-1">{rating}</span>
-                        </h1>
-                        <h2 className='font-allereta bg-slate-900 px-2 py-1 text-white rounded-lg'>
-                            {date}
-                        </h2>
-                    </div>
-                    
-                    <div className='text-white flex justify-center font-inter text-xs bg-slate-800 px-2 py-1 rounded mt-1'>
-                        {language}
+                    {/* Rating on left, Year and Language on right */}
+                    <div className='w-full flex justify-between items-center text-xs lg:text-sm'>
+                        <div className='flex items-center text-white'>
+                            <span className='text-[#fa6900] mr-1'>★</span>
+                            <span className="font-semibold">{rating}</span>
+                        </div>
+                        
+                        <div className='flex items-center gap-1'>
+                            <div className='bg-[#fa6900] text-white px-2 py-1 rounded text-xs font-semibold'>
+                                {date}
+                            </div>
+                            
+                            <div className='bg-gray-700 text-white px-2 py-1 rounded text-xs font-semibold'>
+                                {language}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

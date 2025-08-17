@@ -7,6 +7,7 @@ import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { RxCross2 } from "react-icons/rx";
+import ThemeToggle from './ThemeToggle';
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,15 +54,20 @@ const Nav = () => {
 
       {/* Mobile Navigation */}
       {isMainMenuOpen && (
-        <div className='flex flex-col gap-6 absolute top-16 z-10 items-start bg-[#1A1D24] w-full p-4'>
-          <Link href="/" className='' onClick={handleMenuClick}>Home</Link>
-          <Link href="/comedy" onClick={handleMenuClick}>Comedy</Link>
-          <Link href="/action" className='' onClick={handleMenuClick}>Action</Link>
+        <div className='flex flex-col gap-6 absolute top-16 z-10 items-start bg-white dark:bg-[#1A1D24] w-full p-4 shadow-lg'>
+          <div className='flex items-center justify-between w-full'>
+            <div className='flex flex-col gap-4'>
+              <Link href="/" className='text-gray-800 dark:text-white' onClick={handleMenuClick}>Home</Link>
+              <Link href="/comedy" className='text-gray-800 dark:text-white' onClick={handleMenuClick}>Comedy</Link>
+              <Link href="/action" className='text-gray-800 dark:text-white' onClick={handleMenuClick}>Action</Link>
+            </div>
+            <ThemeToggle />
+          </div>
 
           <div className="relative flex items-start justify-start">
             <button 
               onClick={toggleMenu}
-              className="flex text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              className="flex text-center text-sm text-gray-800 dark:text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
             >
               Language
@@ -99,7 +105,7 @@ const Nav = () => {
             )}
           </div>
 
-          <Link href="/about" className='' onClick={handleMenuClick}>About</Link>
+          <Link href="/about" className='text-gray-800 dark:text-white' onClick={handleMenuClick}>About</Link>
         </div>
       )}
 
@@ -153,7 +159,8 @@ const Nav = () => {
         <Link href="/about" className='hover:text-[#fa6900] transition-colors'>About</Link>
       </div>
 
-      <div className='hidden lg:flex'>
+      <div className='hidden lg:flex items-center gap-4'>
+        <ThemeToggle />
         <a 
           className='hover:text-[#fa6900] transition-colors' 
           href='https://github.com/Yubraj977/ymshub' 

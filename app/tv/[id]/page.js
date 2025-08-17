@@ -40,7 +40,6 @@ export default async function TVPage({ params }) {
     }
 
     const tvShow = await tvRes.json();
-    const vidsrcUrl = `https://vidsrc.xyz/embed/tv?tmdb=${tvId}`;
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -53,7 +52,8 @@ export default async function TVPage({ params }) {
         <div className="w-full max-w-7xl mx-auto px-4 mb-8">
           <div className="relative rounded-xl overflow-hidden shadow-2xl">
             <VideoPlayer 
-              src={vidsrcUrl}
+              tmdbId={tvId}
+              mediaType="tv"
               title={tvShow.name}
               poster={tvShow.poster_path ? `https://image.tmdb.org/t/p/w1280${tvShow.poster_path}` : null}
             />

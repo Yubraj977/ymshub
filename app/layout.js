@@ -8,9 +8,9 @@ import {
   Allerta_Stencil,
   Inter,
 } from "next/font/google";
-import Nav from "./components/Nav";
 import Mypagination from "./components/Mypagination";
-import SearchForm from "./components/SearchForm";
+import ConditionalHeader from "./components/ConditionalHeader";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -61,29 +61,15 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${
-          (danfo.variable, allerta.variable, allerta_stencil.variable)
-        } bg-[#374151] text-white`}
+        className={`${danfo.variable} ${allerta.variable} ${allerta_stencil.variable} ${inter.variable} bg-gray-100 dark:bg-[#374151] text-gray-900 dark:text-white transition-colors duration-300`}
       >
-        <Nav />
-        <div className="font-bold text-md lg:text-4xl text-center mt-10">
-          <h1>Find Movies TV shows Download and enjoy</h1>
-          
-          <SearchForm />
-          
-          <h1 className=" text-sm lg:text-lg font-bold font-allerta_stencil mt-4">
-            This is the website where you can download any kind of movies as per
-            your preference happy entertainment
-          </h1>
-          <h1 className="text-lg font-allerta_stencil hidden lg:block">
-            This is the website where you can download any kind of movies as per
-            your preference happy entertainment
-          </h1>
-        </div>
-        {children}
-        <Analytics />
+        <ThemeProvider>
+          <ConditionalHeader />
+          {children}
+          <Analytics />
 
-        <div className="flex mt-8">{/* <Mypagination /> */}</div>
+          <div className="flex mt-8">{/* <Mypagination /> */}</div>
+        </ThemeProvider>
       </body>
     </html>
   );

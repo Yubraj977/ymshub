@@ -1,4 +1,5 @@
 import Card from "../components/Card";
+import Mypagination from "../components/Mypagination";
 
 export const dynamic = 'force-dynamic';
 
@@ -6,6 +7,7 @@ export default async function SearchPage({ searchParams }) {
   // In Next.js 15, searchParams is a Promise
   const resolvedSearchParams = await searchParams;
   const query = resolvedSearchParams?.q;
+  const page = resolvedSearchParams?.page || 1;
   
   if (!query) {
     return (
@@ -18,7 +20,7 @@ export default async function SearchPage({ searchParams }) {
   try {
     // Search for movies and TV shows with better error handling
     const [moviesRes, tvShowsRes] = await Promise.all([
-      fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&language=en-US&page=1&include_adult=false`, {
+      fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&language=en-US&page=${page}&include_adult=false`, {
         headers: {
           Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNjg2NDM3ZmNlOGVkNTNlMGZmOTAxNjk4ZmZjYmUyMyIsIm5iZiI6MTcyNzg4NjE1My44MDcyMDcsInN1YiI6IjY2ZmMzMDQyZTc4MTFlZjZjYmE2OGJhMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BSHTZ451kreqaeW8mwu4k216v27RuRmTJmxx2DkdmsQ`,
           'Content-Type': 'application/json',
@@ -30,7 +32,7 @@ export default async function SearchPage({ searchParams }) {
         return { ok: false, json: () => ({ results: [] }) };
       }),
       
-      fetch(`https://api.themoviedb.org/3/search/tv?query=${encodeURIComponent(query)}&language=en-US&page=1&include_adult=false`, {
+      fetch(`https://api.themoviedb.org/3/search/tv?query=${encodeURIComponent(query)}&language=en-US&page=${page}&include_adult=false`, {
         headers: {
           Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNjg2NDM3ZmNlOGVkNTNlMGZmOTAxNjk4ZmZjYmUyMyIsIm5iZiI6MTcyNzg4NjE1My44MDcyMDcsInN1YiI6IjY2ZmMzMDQyZTc4MTFlZjZjYmE2OGJhMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BSHTZ451kreqaeW8mwu4k216v27RuRmTJmxx2DkdmsQ`,
           'Content-Type': 'application/json',
@@ -55,6 +57,12 @@ export default async function SearchPage({ searchParams }) {
 
     const movies = Array.isArray(moviesData.results) ? moviesData.results : [];
     const tvShows = Array.isArray(tvShowsData.results) ? tvShowsData.results : [];
+    
+    // Calculate pagination info
+    const moviesTotalPages = moviesData.total_pages || 0;
+    const tvTotalPages = tvShowsData.total_pages || 0;
+    const totalPages = Math.max(moviesTotalPages, tvTotalPages);
+    const currentPage = parseInt(page) || 1;
     
     // Combine and sort results by popularity
     const allResults = [
@@ -105,11 +113,20 @@ export default async function SearchPage({ searchParams }) {
                 date={releaseDate ? releaseDate.split('-')[0] : 'N/A'}
                 language={item.original_language ? item.original_language.toUpperCase() : 'N/A'}
                 link={vidsrcLink}
-                mediaType={item.media_type} // Add this line
+                mediaType={item.media_type}
+                item={item}
               />
             );
           })}
         </div>
+        
+        {totalPages > 1 && (
+          <Mypagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            baseUrl="/search"
+          />
+        )}
       </div>
     );
   } catch (error) {
